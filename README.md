@@ -22,4 +22,4 @@ Materials:
 Instructions:
 1. Cut a peice of the pipe.
 2. Drills two holes for the PG, 2 cm apart. 
-    <img src="images/drilling_holes_inPipe_forPG.jpg" alt="drawing" width="400"/>
+* <img src="images/drilling_holes_inPipe_forPG.jpg" alt="drawing" width="400"/>
