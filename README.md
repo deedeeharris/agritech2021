@@ -22,6 +22,8 @@ Materials:
 Instructions:
 1. Cut a peice of the pipe.
 2. Drill two holes for the PG, 2 cm apart. 
-  <kbd><img src="images/drilling_holes_inPipe_forPG.jpg" alt="drawing" width="400"/></kbd>
+<br/><br/>
+<kbd><img src="images/drilling_holes_inPipe_forPG.jpg" alt="drawing" width="400"/></kbd>
 3. Use a tap wrench to make the holes good for PG.
- <kbd><img src="images/holes_forPG.jpg" alt="drawing" width="400"/></kbd>
+<br/><br/>
+<kbd><img src="images/holes_forPG.jpg" alt="drawing" width="400"/></kbd>
