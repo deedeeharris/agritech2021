@@ -10,11 +10,16 @@ We'll add here photos and the full code.
 
 ## Building the model:
 
-# The pipe (for holding the saturated soil):
+### The pipe (for holding the saturated soil):
 
 Materials:
-* Piece of PVC pipe + cover
+* Piece of PVC pipe (7cm * ?? * ??) + cover
 * 2 * PG-7
 * Glue
 * Thin plastic pipe (like in fish tanks / irrigation)
 * ...
+
+Instructions:
+1. Cut a peice of the pipe.
+2. Drills two holes for the PG, 2 cm apart. 
+    <img src="images/drilling_holes_inPipe_forPG.jpg" alt="drawing" width="400"/>
