@@ -7,14 +7,14 @@
 
 /*************** ThingsSpeak creds start***************/
 #include "ThingSpeak.h"
-unsigned long myChannelNumber = 1401176;
-const char * myWriteAPIKey = "OUZ4TE3F2E9ZIE1O";
+unsigned long myChannelNumber = YOUR-CHANNEL-NUMBER;
+const char * myWriteAPIKey = "YOUR-API-WRITE-KEY";
 const char* server = "api.thingspeak.com";
 /*************** ThingsSpeak creds end***************/
 
 /*************** Wifi creds start***************/
-const char* ssid = "HUJI-guest"; // your wifi SSID name
-const char* password = "" ; // wifi password
+const char* ssid = "YOUR-SSID"; // your wifi SSID name
+const char* password = "YOUR-PASSWORD" ; // wifi password
 WiFiClient client;
 
 /*************** Wifi creds end***************/
