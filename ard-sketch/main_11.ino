@@ -4,20 +4,21 @@
 #include "HX711.h" // import HX711 library
 #include <WiFi.h> // import wifi library
 #include <Wire.h> // import Wire library for ADS1115
+#include <LiquidCrystal_I2C.h> // include LCD library
 #include <Adafruit_ADS1X15.h> // import Adafruit library for ADS1115
 // #include <Adafruit_ADS1015.h> // import Adafruit library for ADS1115 - the ADS1015 import doesn't work. 
 
 
 /*************** ThingsSpeak creds start***************/
 #include "ThingSpeak.h"
-unsigned long myChannelNumber = 1401111;
-const char * myWriteAPIKey = "OUZ4TE3F2E91111";
+unsigned long myChannelNumber = 1401176;
+const char * myWriteAPIKey = "OUZ4TE3F2E9ZIE1O";
 const char* server = "api.thingspeak.com";
 /*************** ThingsSpeak creds end***************/
 
 /*************** Wifi creds start***************/
-const char* ssid = "HHHH"; // your wifi SSID name
-const char* password = "HHH" ; // wifi password
+const char* ssid = "SSID"; // your wifi SSID name
+const char* password = "PASSWORD" ; // wifi password
 WiFiClient client;
 
 /*************** Wifi creds end***************/
@@ -36,12 +37,21 @@ float voltage_pres_up = 0.0; // is connected to A1 on ADS
 float voltage_pres_down = 0.0; // is connected to A0 on ADS
 /*************** PRESSURE vars end***************/
 
+/*************** LCD vars start***************/
+int lcdColumns = 16;
+int lcdRows = 2;
+LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows); // // set LCD address, number of columns and rows
+/*************** LCD vars end***************/
+
 // setup function 
 void setup() {
   
   Serial.begin(57600);
   
   Serial.println("Entering setup"); // for debugging
+ 
+  lcd.init();  // initialize LCD                 
+  lcd.backlight();  // turn on LCD backlight     
   
   ads.setGain(GAIN_ONE); // set the input range for the ADS1115:  +/- 4.096V  1 bit = 0.125mV
   ads.begin(); // start our ADS board (gets input from our pressure sensors)
@@ -92,6 +102,7 @@ Serial.println("Exiting setup"); // for debugging
 void loop() {
 
   Serial.println("Entering loop"); // for debugging
+ 
   readScale(); // calling a function to get readings from scale
   readPressure(); // calling a function to get readings from pressure sensors
   Serial.println("Exiting loop"); // for debugging
@@ -112,6 +123,10 @@ void readScale(){
     Serial.print(finalReading);
     Serial.print(" g");
     Serial.println(); //change line
+
+    lcd.setCursor(0, 0); // set cursor to first column, first row
+    lcd.print("Hello world");
+    lcd.clear();
   } else {
     Serial.println("HX711 not found.");
 
@@ -121,7 +136,7 @@ void readScale(){
  
   Serial.println("Waiting to upload next reading...");
   Serial.println();  
-  delay(20000);   // thingspeak needs minimum 15 sec delay between updates
+  // delay(20000);   // thingspeak needs minimum 15 sec delay between updates
 
   Serial.println("Exiting readScale function"); // for debugging
 }
@@ -130,15 +145,18 @@ void readScale(){
 // function to get readings from the Pressure sensors (ADS1115) - print to serial and upload to thinkspeak
 void readPressure(){
   
-  // THIS PRESSURE CODE DOESN'T WORK FOR US YET 2/6/2021
 
   Serial.println("Entering readPressure function"); // for debugging
   
   int16_t adc0; // initialize the 16 bit long integer variable adc0 which is used to store output from bottom pressure sensor
   int16_t adc1; // initialize the 16 bit long integer variable adc0 which is used to store output from top pressure sensor
+
+  Serial.println("readPressure variables configured"); // for debugging
   
   adc0 = ads.readADC_SingleEnded(0); // read analog channel zero adc value and store this value in adc0 integer variable (bottom)
   adc1 = ads.readADC_SingleEnded(1); // read analog channel zero adc value and store this value in adc1 integer variable (top)
+
+  Serial.println("readPressure readed signals"); // for debugging
   
   voltage_pres_down = (adc0 * 0.125 * 1.5)/1000; // divided by 1000 to convert  mV to V; 0.125 from SetGain; 1.5 voltage divider; (bottom)
   voltage_pres_up = (adc1 * 0.125 * 1.5)/1000; // divided by 1000 to convert  mV to V; 0.125 from SetGain; 1.5 voltage divider; (top)
