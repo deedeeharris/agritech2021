@@ -11,8 +11,8 @@
 
 /*************** ThingsSpeak creds start***************/
 #include "ThingSpeak.h"
-unsigned long myChannelNumber = 1401176;
-const char * myWriteAPIKey = "OUZ4TE3F2E9ZIE1O";
+unsigned long myChannelNumber = 00000;
+const char * myWriteAPIKey = "AAAAA";
 const char* server = "api.thingspeak.com";
 /*************** ThingsSpeak creds end***************/
 
