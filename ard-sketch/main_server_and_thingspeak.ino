@@ -15,16 +15,16 @@
 float weight, pressure_up, pressure_down; // global vars to upload to ThingSpeak
 
 /*************** ThingsSpeak creds start***************/
-unsigned long myChannelNumber = 1401176;
-const char * myWriteAPIKey = "OUZ4TE3F2E9ZIE1O";
+unsigned long myChannelNumber = 00000;
+const char * myWriteAPIKey = "AAAA";
 const char* server = "api.thingspeak.com";
 WiFiClient  client;
 /*************** ThingsSpeak creds end***************/
 
 
 /*************** Wifi creds start***************/
-const char* ssid = "hy7";  // Enter SSID here
-const char* password = "Harris671";  // Enter Password here
+const char* ssid = "AAAA";  // Enter SSID here
+const char* password = "11111";  // Enter Password here
 WebServer wserver(80); // important: we called the websever as 'wserver' and not 'server', since 'server' is already used for ThingSpeak above
 /*************** Wifi creds end***************/
 
