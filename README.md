@@ -8,6 +8,8 @@ Take a look in the folder <a href="https://github.com/deedeeharris/agritech2021/
 
 We'll add here photos and the full code.
 
+In addition, for detailed instructions take a look at our instructable: https://www.instructables.com/Measuring-Hydraulic-Properties-of-Soil-With-ESP32/
+
 ## Building the model:
 
 ### The pipe (for holding the saturated soil):
