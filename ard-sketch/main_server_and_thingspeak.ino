@@ -1,5 +1,6 @@
-// Edited by Yedidya Harris and Yehuda Yungstien students at HUJI
+// Edited by Yedidya Harris and Yehuda Yungstien students at HUJI (July 2021)
 // https://github.com/deedeeharris/agritech2021 
+// Detailed instructions here: https://www.instructables.com/Measuring-Hydraulic-Properties-of-Soil-With-ESP32/
 
 // import libraries
 #include <WiFi.h> // import wifi library
@@ -15,16 +16,16 @@
 float weight, pressure_up, pressure_down; // global vars to upload to ThingSpeak
 
 /*************** ThingsSpeak creds start***************/
-unsigned long myChannelNumber = 00000;
-const char * myWriteAPIKey = "AAAA";
+unsigned long myChannelNumber = 000000000;
+const char * myWriteAPIKey = "AAAAAAAAA";
 const char* server = "api.thingspeak.com";
 WiFiClient  client;
 /*************** ThingsSpeak creds end***************/
 
 
 /*************** Wifi creds start***************/
-const char* ssid = "AAAA";  // Enter SSID here
-const char* password = "11111";  // Enter Password here
+const char* ssid = "AAA";  // Enter SSID here 
+const char* password = "AAA";  // Enter Password here
 WebServer wserver(80); // important: we called the websever as 'wserver' and not 'server', since 'server' is already used for ThingSpeak above
 /*************** Wifi creds end***************/
 
@@ -102,13 +103,19 @@ void setup() {
 
   /*************** SCALE SETUP start***************/
   scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
+  zero = 376.3;
   delay(1000);
-  if (scale.is_ready()) {
+
+  // this code is used only once for callibration of the scale, getting the zero value.
+  /* if (scale.is_ready()) {
     long reading = scale.read();
     zero = reading*0.0189-157017; // Ravital and Adiel from course 71252 HUJI 2021 calculated the linear deviation of the scale - Calibration Factor. You may need to use a diff factor for your scale.
+    Serial.println("The ZERO value is:");
+    Serial.println(zero);
   } else {
     Serial.println("HX711 not found.");
-  }
+  }*/
+  
   /*************** SCALE SETUP end***************/
 
   Serial.println("Exiting setup"); // for debugging
@@ -127,7 +134,15 @@ void loop() {
        
     delay(1000); // delay a second. after 15 secs upload readings to ThingSpeak
   }  
-  
+
+
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println("Lost WIFI connection!");
+    WiFi.disconnect();
+    WiFi.reconnect();
+    Serial.println("WIFI is reconnecting");
+    
+  }
   ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey); // upload the fields to ThingSpeak server
   client.stop(); // stop the ThingSpeak client
  
@@ -167,21 +182,23 @@ void readPressure(){
   
   int16_t adc0; // initialize the 16 bit long integer variable adc0 which is used to store output from bottom pressure sensor
   int16_t adc1; // initialize the 16 bit long integer variable adc0 which is used to store output from top pressure sensor
-
+  
   Serial.println("readPressure variables configured"); // for debugging
   
   adc0 = ads.readADC_SingleEnded(0); // read analog channel zero adc value and store this value in adc0 integer variable (bottom)
   adc1 = ads.readADC_SingleEnded(1); // read analog channel zero adc value and store this value in adc1 integer variable (top)
-
+  
   Serial.println("readPressure readed signals"); // for debugging
   
-  voltage_pres_down = (adc0 * 0.125 * 1.5)/1000; // divided by 1000 to convert  mV to V; 0.125 from SetGain; 1.5 voltage divider; (bottom)
-  voltage_pres_up = (adc1 * 0.125 * 1.5)/1000; // divided by 1000 to convert  mV to V; 0.125 from SetGain; 1.5 voltage divider; (top)
+  // voltage_pres_down = (adc0 * 0.125 * 1.5)/1000; // divided by 1000 to convert  mV to V; 0.125 from SetGain; 1.5 voltage divider; (bottom)
+  // voltage_pres_up = (adc1 * 0.125 * 1.5)/1000; // divided by 1000 to convert  mV to V; 0.125 from SetGain; 1.5 voltage divider; (top)
   
-  pressure_down = (voltage_pres_down/5 - 0.04) / 0.009;
-  pressure_up = (voltage_pres_up/5 - 0.04) / 0.009;
+  // pressure_down = (voltage_pres_down/5 - 0.04) / 0.009;
+  // pressure_up = (voltage_pres_up/5 - 0.04) / 0.009;
   
- 
+  pressure_down = 0.102*( (1.5*adc0)/22.22 -4.44 );
+  pressure_up = 0.102*( (1.5*adc1)/22.22 -4.44 );
+  
   Serial.print("Pressure Bottom: "); 
   Serial.print(pressure_down);
   Serial.println();
@@ -189,7 +206,7 @@ void readPressure(){
   Serial.print("Pressure Top: "); 
   Serial.print(pressure_up);
   Serial.println();;  
-  
+    
   Serial.println("Exiting readPressure function"); // for debugging
 }
 
@@ -235,7 +252,7 @@ String SendHTML(float weight,float pressure_up,float pressure_down, String daySt
   ptr +="body{margin-top: 50px;} h1 {color: #444444;margin: 50px auto 30px;}\n";
   ptr +="p {font-size: 24px;color: #444444;margin-bottom: 10px;}\n";
   ptr +="</style>\n";
-  ptr +="<meta http-equiv=\"refresh\" content=\"5\" >\n";
+  ptr +="<meta http-equiv=\"refresh\" content=\"5\" >\n"; // auto refreshes the HTML page every 5 seconds
   ptr +="</head>\n";
   ptr +="<body>\n";
   ptr +="<div id=\"webpage\">\n";
