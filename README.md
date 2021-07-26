@@ -1,4 +1,4 @@
-# Soil Hydraulic Conductivity Meter (SHC Meter) (AgriTech project)
+# Soil Hydraulic Conductivity Meter - SHC Meter (AgriTech project)
 Cross-disciplinary studies - Agronomy and Data
 
 In this project we'll build an esp-32 based instrument for measuring hydraulic properties of soil.
