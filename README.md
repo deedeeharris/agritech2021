@@ -11,7 +11,7 @@ Take a look in the <a href="https://github.com/deedeeharris/agritech2021/tree/ma
 
 For detailed instructions visit our instructable: https://www.instructables.com/Measuring-Hydraulic-Properties-of-Soil-With-ESP32/
 
-You're welcome to check out our <a href="https://github.com/deedeeharris/agritech2021/tree/main/report">final report</a>, including our results and their analysis.
+You're welcome to check out our <a href="https://github.com/deedeeharris/agritech2021/tree/main/report">final report</a>, including the results and their analysis.
 
 All the best,
 
