@@ -19,10 +19,7 @@ You're welcome to check out our <a href="https://github.com/deedeeharris/agritec
 All the best,
 
 **Yedidya Harris
-
 Yehuda Yungstien
-
-**The Faculty of Agriculture
-
-**The Hebrew University of Jerusalem (ISRAEL)
+The Faculty of Agriculture
+The Hebrew University of Jerusalem (ISRAEL)
 
