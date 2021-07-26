@@ -20,7 +20,7 @@ All the best,
 
 **Yedidya Harris
 
-**Yehuda Yungstien
+Yehuda Yungstien
 
 **The Faculty of Agriculture
 
